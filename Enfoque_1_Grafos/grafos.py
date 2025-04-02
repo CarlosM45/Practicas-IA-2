@@ -37,7 +37,7 @@ class Problema:
             for sala in self.acciones.keys():
                 self.heuristicas[sala] = {}
                 for objetivo in self.salas_objetivos:
-                    self.heuristicas[sala][accion] = self.infinito
+                    self.heuristicas[sala][objetivo] = self.infinito
 
     def __str__(self):
         msg = "Sala Inicial: {0} -> Objetivos: {1}"
