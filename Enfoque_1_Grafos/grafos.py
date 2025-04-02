@@ -24,6 +24,7 @@ class Problema:
         self.salas_objetivos = salas_objetivos
         self.acciones = acciones
         self.costes = costes
+        self.heuristicas = heuristicas
         self.infinito = 99999
         if not self.costes:
             self.costes = {}
@@ -31,6 +32,12 @@ class Problema:
                 self.costes[sala] = {}
                 for accion in self.acciones[sala].keys():
                     self.costes[sala][accion] = 1
+        if not self.heuristicas:
+            self.heuristicas = {}
+            for sala in self.acciones.keys():
+                self.heuristicas[sala] = {}
+                for objetivo in self.salas_objetivos:
+                    self.heuristicas[sala][accion] = self.infinito
 
     def __str__(self):
         msg = "Sala Inicial: {0} -> Objetivos: {1}"
@@ -72,6 +79,10 @@ class Nodo:
         self.padre = padre
         self.hijos = []
         self.coste = 0
+        self.heuristicas = {}
+        self.valores = {}
+        self.alfa = 0
+        self.beta = 0
 
     def __str__(self):
         return self.sala.nombre
@@ -92,19 +103,50 @@ class Nodo:
             coste = self.padre.coste if self.padre else 0
             coste += problema.coste_accion(self.sala, accion_hijo)
             hijo.coste = coste
+            hijo.heuristicas = problema.heuristicas[hijo.sala.nombre]
+            hijo.valores = {sala: heuristica+hijo.coste
+                            for sala, heuristica
+                            in hijo.heuristicas.items()}
             self.hijos.append(hijo)
         return self.hijos
     
-    def hijo_mejor(self, problema):
+    def hijo_mejor(self, problema, metrica='valor', criterio='menor'):
         if not self.hijos:
             return None
         mejor = self.hijos[0]
         for hijo in self.hijos:
             for objetivo in problema.salas_objetivos:
-                coste_camino_hijo = problema.coste_camino(hijo)
-                coste_camino_mejor = problema.coste_camino(mejor)
-                if coste_camino_hijo < coste_camino_mejor:
-                    mejor = hijo
+                if metrica == 'valor':
+                    valor_hijo = hijo.valores[objetivo.nombre]
+                    valor_mejor = mejor.valores[objetivo.nombre]
+                    if (criterio == 'menor' and valor_hijo < valor_mejor):
+                        mejor = hijo
+                    elif (criterio == 'mayor' and valor_hijo > valor_mejor):
+                        mejor = hijo
+                elif metrica == 'heuristica':
+                    heuristica_hijo = hijo.heuristicas[objetivo.nombre]
+                    heuristica_mejor = mejor.heuristicas[objetivo.nombre]
+                    if (criterio == 'menor' and heuristica_hijo < heuristica_mejor):
+                        mejor = hijo
+                    elif (criterio == 'mayor' and heuristica_hijo > heuristica_mejor):
+                        mejor = hijo
+                elif metrica == 'coste':
+                    coste_camino_hijo = problema.coste_camino(hijo)
+                    coste_camino_mejor = problema.coste_camino(mejor)
+                    if (criterio == 'menor' and coste_camino_hijo < coste_camino_mejor):
+                        mejor = hijo
+                    elif (criterio == 'mayor' and coste_camino_hijo > coste_camino_mejor):
+                        mejor = hijo
+                elif metrica == 'alfa':
+                    if (criterio == 'menor' and hijo.alfa < mejor.alfa):
+                        mejor = hijo
+                    elif (criterio == 'mayor' and hijo.alfa > mejor.alfa):
+                        mejor = hijo
+                elif metrica == 'beta':
+                    if (criterio == 'menor' and hijo.beta < mejor.beta):
+                        mejor = hijo
+                    elif (criterio == 'mayor' and hijo.beta > mejor.beta):
+                        mejor = hijo
         return mejor
 
 
@@ -398,4 +440,4 @@ if __name__ == '__main__':
                                       'Acceso a azotea': 0}}
 
 # Creación de un problema (ir desde la recepción hasta la oficina)
-problema_rec_off = Problema(reception, [office], movimientos, mts)
+problema_rec_off = Problema(reception, [office], movimientos, mts, distancias)
