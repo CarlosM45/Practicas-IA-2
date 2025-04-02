@@ -438,6 +438,3 @@ if __name__ == '__main__':
                                       'Rehabilitación': 18.03,
                                       'Oficina': 7.07,
                                       'Acceso a azotea': 0}}
-
-# Creación de un problema (ir desde la recepción hasta la oficina)
-problema_rec_off = Problema(reception, [office], movimientos, mts, distancias)
