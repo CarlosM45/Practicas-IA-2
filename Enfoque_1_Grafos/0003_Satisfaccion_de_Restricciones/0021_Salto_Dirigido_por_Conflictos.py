@@ -1,6 +1,6 @@
-# Definimos el problema de coloreo de mapas con 3 colores
 from os import system
 
+# Definimos el problema de coloreo de mapas con 3 colores
 variables = ['A', 'B', 'C', 'D', 'E']
 dominios = {
     'A': ['Rojo', 'Verde', 'Azul'],
