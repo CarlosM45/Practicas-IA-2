@@ -1,0 +1,1 @@
+# Según eso la traducción automática estadística tampoco es un algoritmo
