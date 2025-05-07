@@ -1,0 +1,1 @@
+# Me dicen que recuperación de datos no es un algoritmo
