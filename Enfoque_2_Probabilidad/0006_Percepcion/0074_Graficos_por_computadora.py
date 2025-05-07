@@ -1,0 +1,1 @@
+# Al parecer, gráficos por computadora no es un algoritmo por sí mismo, sino una combinación de algoritmos y técnicas para crear imágenes y animaciones en una computadora.
