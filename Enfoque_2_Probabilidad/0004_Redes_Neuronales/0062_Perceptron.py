@@ -1,9 +1,9 @@
 # Perceptron, ADALINE y MADALINE
-import numpy as np
-from sklearn.datasets import load_iris
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import Perceptron
-from sklearn.metrics import accuracy_score
+import numpy as np # Numpy es una biblioteca de Python para computación científica y arreglo de datos
+from sklearn.datasets import load_iris # Importar el conjunto de datos Iris, que es un conjunto de datos clásico con muestras de flores
+from sklearn.model_selection import train_test_split # Importar la función train_test_split de sklearn.model_selection, que divide los datos en conjuntos de entrenamiento y prueba
+from sklearn.linear_model import Perceptron # Importar el modelo Perceptrón de sklearn.linear_model, que es un algoritmo de aprendizaje supervisado
+from sklearn.metrics import accuracy_score # Importar la función accuracy_score de sklearn.metrics, que calcula la precisión del modelo
 
 # Cargar el conjunto de datos Iris
 iris = load_iris()

@@ -1,7 +1,7 @@
 # Retropropagacion de error
-import tensorflow as tf
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense
+import tensorflow as tf # TensorFlow es una biblioteca de código abierto para computación numérica y aprendizaje automático
+from tensorflow.keras.models import Sequential # Importar la clase Sequential de Keras, que permite construir modelos de redes neuronales de forma secuencial
+from tensorflow.keras.layers import Dense # Importar la clase Dense de Keras, que representa una capa densa (totalmente conectada) en la red neuronal
 
 # Crear el modelo secuencial
 model = Sequential()

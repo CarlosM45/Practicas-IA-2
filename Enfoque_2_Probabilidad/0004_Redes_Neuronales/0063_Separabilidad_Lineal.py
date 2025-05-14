@@ -1,7 +1,7 @@
 # Separabilidad lineal
-import numpy as np
-import matplotlib.pyplot as plt
-from sklearn.linear_model import Perceptron
+import numpy as np # Numpy es una biblioteca de Python para computación científica y arreglo de datos
+import matplotlib.pyplot as plt # Matplotlib es una biblioteca de Python para crear gráficos y visualizaciones
+from sklearn.linear_model import Perceptron # Importar el modelo Perceptrón de sklearn.linear_model, que es un algoritmo de aprendizaje supervisado
 
 # Crear un conjunto de datos linealmente separable
 X = np.array([[2, 3], [3, 4], [4, 5], [6, 7], [1, 8], [7, 2], [8, 3], [9, 1]])
