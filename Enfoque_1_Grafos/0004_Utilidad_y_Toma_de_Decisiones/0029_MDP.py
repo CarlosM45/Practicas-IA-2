@@ -1,3 +1,4 @@
+# Proceso de Decisión de Markov (MDP) en Python
 from os import system
 
 # Definimos los estados, acciones, transiciones y recompensas

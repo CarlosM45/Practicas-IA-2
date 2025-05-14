@@ -1,3 +1,4 @@
+# Proceso de Decisión de Markov Parcialmente Observable (POMDP) en Python
 import numpy as np
 from os import system
 
