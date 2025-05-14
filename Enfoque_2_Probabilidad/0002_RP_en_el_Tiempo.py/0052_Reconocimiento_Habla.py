@@ -1,21 +1,19 @@
 # Reconocimiento del Habla
-import speech_recognition as sr
+import speech_recognition as sr # Librería para reconocimiento de voz
 
-# Initialize recognizer class (for recognizing the speech)
+# Inicializar clase de reconocimiento
 r = sr.Recognizer()
 
-# Reading Microphone as source
-# listening the speech and store in audio_text variable
+# Leyendo el micrófono como entrada
+# Escuchando el habla y guardando en audio_text
 with sr.Microphone() as source:
     print("Talk")
     audio_text = r.listen(source)
     print("Time over, thanks")
-    # recoginze_() method will throw a request
-    # error if the API is unreachable,
-    # hence using exception handling
-    
+    # Recognize dará un error si no puede reconocer el habla debido a la falta de conexión con la API
+
     try:
-        # using google speech recognition
+        # Usando Google Speech Recognition
         print("Text: "+r.recognize_google(audio_text))
     except:
          print("Sorry, I did not get that")
