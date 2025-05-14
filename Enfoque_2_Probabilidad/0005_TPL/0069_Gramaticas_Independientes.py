@@ -1,8 +1,8 @@
 # Gramáticas Probab. Independ. del Contexto
-import nltk
-from nltk import CFG
-from nltk.parse.generate import generate
-from nltk import ProbabilisticProduction, Nonterminal, PCFG
+import nltk # Importar la biblioteca NLTK para el procesamiento de lenguaje natural
+from nltk import CFG # Importar la gramática libre de contexto (Context-Free Grammar)
+from nltk.parse.generate import generate # Importar la función para generar oraciones a partir de la gramática
+from nltk import ProbabilisticProduction, Nonterminal, PCFG # Importar la gramática probabilística de contexto libre (Probabilistic Context-Free Grammar)
 
 # Definir las reglas de producción con probabilidades
 pcfg_grammar = PCFG.fromstring('''

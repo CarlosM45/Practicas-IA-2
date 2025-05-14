@@ -1,6 +1,6 @@
 # Gramáticas Probabilísticas Lexicalizadas
-import nltk
-from nltk import Nonterminal, PCFG
+import nltk #nltk es una biblioteca de procesamiento de lenguaje natural
+from nltk import Nonterminal, PCFG # Importar la gramática probabilística de contexto libre (Probabilistic Context-Free Grammar)
 
 # Definir una gramática PCFG lexicalizada
 pcfg_grammar = PCFG.fromstring('''
