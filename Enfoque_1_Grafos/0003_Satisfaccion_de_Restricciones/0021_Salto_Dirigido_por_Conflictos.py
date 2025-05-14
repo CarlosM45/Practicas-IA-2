@@ -1,4 +1,4 @@
-from os import system
+from os import system # Limpiar la consola
 
 # Definimos el problema de coloreo de mapas con 3 colores
 variables = ['A', 'B', 'C', 'D', 'E']

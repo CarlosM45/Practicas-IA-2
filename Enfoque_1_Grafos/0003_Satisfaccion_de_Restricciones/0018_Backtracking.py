@@ -1,3 +1,4 @@
+# Backtracking para resolver el problema de las N reinas
 def is_safe(board, row, col, N):
     # Verificar lado izquierdo
     for i in range(col):
@@ -17,10 +18,12 @@ def is_safe(board, row, col, N):
     return True
 
 
+# Función para resolver el problema de las N reinas y devolver todas las soluciones posibles
 def solve_n_queens(N):
     board = [['.' for _ in range(N)] for _ in range(N)]
     result = []
 
+    # Función de retroceso para encontrar todas las soluciones
     def backtrack(board, col):
         if col == N:
             result.append([''.join(row) for row in board])

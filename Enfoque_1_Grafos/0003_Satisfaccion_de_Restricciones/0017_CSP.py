@@ -1,3 +1,5 @@
+# Constraint Satisfaction Problem (CSP) - Resolver un Sudoku
+# Estructura del Sudoku donde 0 son celdas vacías
 puzzle = [[5, 3, 0, 0, 7, 0, 0, 0, 0],
           [6, 0, 0, 1, 9, 5, 0, 0, 0],
           [0, 9, 8, 0, 0, 0, 0, 6, 0],
@@ -9,6 +11,7 @@ puzzle = [[5, 3, 0, 0, 7, 0, 0, 0, 0],
           [0, 0, 0, 0, 8, 0, 0, 0, 0]
           ]
 
+# Función para imprimir el sudoku en un formato legible
 def print_sudoku(puzzle):
     for i in range(9):
         if i % 3 == 0 and i != 0:
