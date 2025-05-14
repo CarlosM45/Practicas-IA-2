@@ -1,7 +1,7 @@
 # Carlos Alejandro Mercado Villalvazo
-import cv2
+import cv2 # OpenCV es una biblioteca de visión por computadora
 
-input_video = "video.mp4"
+input_video = "video.mp4" # Ruta del video de entrada
 
 
 def vid_inf(vid_path):
@@ -15,7 +15,7 @@ def vid_inf(vid_path):
     fourcc = cv2.VideoWriter_fourcc(*"mp4v")
     output_video = "output_recorded.mp4"
 
-    out = cv2.VideoWriter(output_video, fourcc, fps, frame_size)
+    out = cv2.VideoWriter(output_video, fourcc, fps, frame_size) # Crear objeto de salida
 
     # Crear el objeto para eliminar el fondo
     backSub = cv2.createBackgroundSubtractorMOG2()
@@ -33,7 +33,7 @@ def vid_inf(vid_path):
             # Aplicar eliminación del fondo
             fg_mask = backSub.apply(frame)
 
-            # Aplicar filtro par ignorar las sombras
+            # Aplicar filtro para ignorar las sombras
             retval, mask_thresh = cv2.threshold(fg_mask, 180, 255, cv2.THRESH_BINARY)
 
             # Configurar el kernel

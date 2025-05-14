@@ -1,14 +1,14 @@
 # Reconocimiento de objetos
-import cv2
-from ultralytics import YOLO
+import cv2 # OpenCV es una biblioteca de visión por computadora
+from ultralytics import YOLO # YOLO es un modelo de detección de objetos
 
-# Load the model
+# Cargar el modelo YOLO
 yolo = YOLO('yolov8s.pt')
 
-# Load the video capture
+# Cargar captura de video
 videoCap = cv2.VideoCapture(0)
 
-# Function to get class colors
+# Función para obtener colores
 def getColours(cls_num):
     base_colors = [(255, 0, 0), (0, 255, 0), (0, 0, 255)]
     color_index = cls_num % len(base_colors)
@@ -26,40 +26,40 @@ while True:
 
 
     for result in results:
-        # get the classes names
+        # Obtener los nombres de las clases
         classes_names = result.names
 
-        # iterate over each box
+        # Iterar sobre las cajas detectadas
         for box in result.boxes:
-            # check if confidence is greater than 40 percent
+            # Verificar si la confianza es mayor que 0.4
             if box.conf[0] > 0.4:
-                # get coordinates
+                # Obtener las coordenadas de la caja
                 [x1, y1, x2, y2] = box.xyxy[0]
-                # convert to int
+                # Convertir las coordenadas a enteros
                 x1, y1, x2, y2 = int(x1), int(y1), int(x2), int(y2)
 
-                # get the class
+                # Obtener la clase
                 cls = int(box.cls[0])
 
-                # get the class name
+                # Obtener el nombre de la clase
                 class_name = classes_names[cls]
 
-                # get the respective colour
+                # Obtener el color respectivo
                 colour = getColours(cls)
 
-                # draw the rectangle
+                # Dibujar el rectángulo alrededor del objeto
                 cv2.rectangle(frame, (x1, y1), (x2, y2), colour, 2)
 
-                # put the class name and confidence on the image
+                # Poner el texto con el nombre de la clase y la confianza
                 cv2.putText(frame, f'{classes_names[int(box.cls[0])]} {box.conf[0]:.2f}', (x1, y1), cv2.FONT_HERSHEY_SIMPLEX, 1, colour, 2)
                 
-    # show the image
+    # Mostrar la imagen
     cv2.imshow('frame', frame)
 
-    # break the loop if 'q' is pressed
+    # Romper el bucle si se presiona 'q'
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
-# release the video capture and destroy all windows
+# Desconectar la cámara y cerrar todas las ventanas
 videoCap.release()
 cv2.destroyAllWindows()

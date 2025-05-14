@@ -1,7 +1,7 @@
 # Preprocesado: Filtros - Filtro Gaussiano
-import cv2
-import numpy as np
-import matplotlib.pyplot as plt
+import cv2 # OpenCV es una biblioteca de visión por computadora
+import numpy as np # Numpy es una biblioteca de Python para computación científica y arreglo de datos
+import matplotlib.pyplot as plt # Matplotlib es una biblioteca de Python para crear gráficos y visualizaciones
 
 # Cargar la imagen
 image = cv2.imread("msc.png")

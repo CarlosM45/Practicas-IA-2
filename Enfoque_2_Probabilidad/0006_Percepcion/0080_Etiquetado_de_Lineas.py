@@ -1,34 +1,36 @@
 # Etiquetados de Líneas
-import cv2 
-import numpy as np 
+import cv2 # OpenCV es una biblioteca de visión por computadora
+import numpy as np # Numpy es una biblioteca de Python para computación científica y arreglo de datos
 
-# Loading the image 
+# Cargar la imagen
 img = cv2.imread("msc.png") 
 
-# preprocess the image 
+# Preprocesar la imagen
 gray_img = cv2.cvtColor(img , cv2.COLOR_BGR2GRAY) 
 
-# Applying 7x7 Gaussian Blur 
+# Aplicar el filtro Gaussiano 7x7
 blurred = cv2.GaussianBlur(gray_img, (7, 7), 0) 
 
-# Applying threshold 
+# Aplicar el umbral Otsu
+# El umbral Otsu es un método de binarización automática
 threshold = cv2.threshold(blurred, 0, 255, 
 	cv2.THRESH_BINARY_INV | cv2.THRESH_OTSU)[1] 
 
-# Apply the Component analysis function 
+# Aplicar la dilatación para unir componentes
 analysis = cv2.connectedComponentsWithStats(threshold, 
 											4, 
 											cv2.CV_32S) 
 (totalLabels, label_ids, values, centroid) = analysis 
 
-# Initialize a new image to store 
-# all the output components 
+# Inicializar una nueva imagen de salida
+# La imagen de salida tendrá el mismo tamaño que la imagen original
 output = np.zeros(gray_img.shape, dtype="uint8") 
 
-# Loop through each component 
+# Hacer un bucle sobre los componentes
+# Ignorar el primer componente (fondo)
 for i in range(1, totalLabels): 
 	
-	# Area of the component 
+	# Área del componente
 	area = values[i, cv2.CC_STAT_AREA] 
 	
 	if (area > 140) and (area < 400): 
