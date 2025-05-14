@@ -1,13 +1,14 @@
 # Inicializar un gráfico
-import networkx as nx
-import random
-import matplotlib.pyplot as plt
-import math
+import networkx as nx # Librería para grafo
+import random # Librería para números aleatorios
+import matplotlib.pyplot as plt # Librería para graficar
+import math # Librería de funciones matemáticas
 
-G = nx.complete_graph(25)
+G = nx.complete_graph(25) # Grafo completo de 25 nodos
 for (u, v) in G.edges():
-    G.edges[u, v]['weight'] = random.randint(0, 10)
+    G.edges[u, v]['weight'] = random.randint(0, 10) # Asignar pesos aleatorios a las aristas
 
+# Graficar el grafo
 plt.figure(figsize=(25, 25))
 nx.draw(G, with_labels=True)
 plt.show()
@@ -22,6 +23,7 @@ def cost_of_tour(G, tour):
     return cost
 
 
+# Función para obtener el mejor vecino
 def get_best_neighbour(G, tour, tabu_history, tabu_limit, aspiration):
     best_neighbour = None
     best_neighbour_cost = math.inf
@@ -53,6 +55,7 @@ def get_best_neighbour(G, tour, tabu_history, tabu_limit, aspiration):
     return best_neighbour
 
 
+# Algoritmo de búsqueda tabú
 def tabu_search(
     G,
     initial_solution,

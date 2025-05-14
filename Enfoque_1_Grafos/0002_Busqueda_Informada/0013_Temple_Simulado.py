@@ -1,9 +1,9 @@
 # Búsqueda de temple simulado para una función unidimensional
-from numpy import asarray
-from numpy import exp
-from numpy.random import randn
-from numpy.random import rand
-from numpy.random import seed
+from numpy import asarray # Asarray convierte una lista a un array
+from numpy import exp # exp es la función exponencial
+from numpy.random import randn # Generar números aleatorios con distribución normal
+from numpy.random import rand # Generar números aleatorios uniformemente distribuidos
+from numpy.random import seed # Semilla para el generador de números
 
 # Función objetivo
 def objective(x):

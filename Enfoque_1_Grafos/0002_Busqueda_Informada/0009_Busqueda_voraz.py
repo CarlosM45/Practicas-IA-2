@@ -37,6 +37,7 @@ def voraz(problema):
                 frontera.append(hijo)
 
 
+# Función para crear el nodo raíz
 def crea_nodo_raiz(problema):
     sala_raiz = problema.sala_inicial
     acciones_raiz = {}
@@ -49,6 +50,7 @@ def crea_nodo_raiz(problema):
     return raiz
 
 
+# Función para crear un nodo hijo
 def crea_nodo_hijo(problema, padre, accion, agregar=True):
     nueva_sala = problema.resultado(padre.sala, accion)
     acciones_nuevo = {}
@@ -68,6 +70,7 @@ def crea_nodo_hijo(problema, padre, accion, agregar=True):
     return hijo
 
 
+# Función para sacar el siguiente nodo de la frontera
 def sacar_siguiente(frontera, metrica='valor', criterio='menor', objetivos=None):
     if not frontera:
         return None
@@ -103,6 +106,7 @@ def sacar_siguiente(frontera, metrica='valor', criterio='menor', objetivos=None)
     return mejor
 
 
+# Función para mostrar la solución
 def muestra_solucion(objetivo=None):
     if not objetivo:
         print("No hay solución")

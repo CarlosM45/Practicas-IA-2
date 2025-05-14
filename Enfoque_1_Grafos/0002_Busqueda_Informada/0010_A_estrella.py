@@ -104,6 +104,7 @@ def construir_solucion(raiz, grafo, solucion):
     return camino
 
 
+# Función para crear el nodo raíz del problema
 def crea_nodo_raiz(problema):
     sala_raiz = problema.sala_inicial
     acciones_raiz = {}
@@ -116,6 +117,7 @@ def crea_nodo_raiz(problema):
     return raiz
 
 
+# Función para crear el nodo hijo de cada nodo padre
 def crea_nodo_hijo(problema, padre, accion, agregar=True):
     nueva_sala = problema.resultado(padre.sala, accion)
     acciones_nuevo = {}
@@ -135,6 +137,7 @@ def crea_nodo_hijo(problema, padre, accion, agregar=True):
     return hijo
 
 
+# Función para sacar el siguiente nodo de la frontera
 def sacar_siguiente(frontera, metrica='valor', criterio='menor', objetivos=None):
     if not frontera:
         return None
@@ -170,6 +173,7 @@ def sacar_siguiente(frontera, metrica='valor', criterio='menor', objetivos=None)
     return mejor
 
 
+# Función para mostrar la solución encontrada
 def muestra_solucion(objetivo=None):
     if not objetivo:
         print("No hay solución")

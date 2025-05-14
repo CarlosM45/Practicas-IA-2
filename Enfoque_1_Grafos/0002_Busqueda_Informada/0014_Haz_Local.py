@@ -1,4 +1,5 @@
-from numpy import array
+# Local Beam Search
+from numpy import array # array convierte una lista a un array
  
  
 # Beta es ancho de haz y distancias son pesos
@@ -23,7 +24,7 @@ def beam_search(distances, beta):
                 path_extended = [path + [j], distance + tier[j]]
                 paths_at_tier.append(path_extended)
                  
-        paths_ordered = sorted(paths_at_tier, key=lambda element: element[1])
+        paths_ordered = sorted(paths_at_tier, key=lambda element: element[1]) # Ordenar por distancia, donde key es lambda para obtener el segundo elemento de cada lista
          
         # Guardar mejores caminos
         paths_so_far = paths_ordered[:beta]

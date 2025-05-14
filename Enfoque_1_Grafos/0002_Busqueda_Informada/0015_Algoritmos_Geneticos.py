@@ -1,7 +1,7 @@
 import random
 import matplotlib.pyplot as plt
 import numpy as np
-from prettytable import PrettyTable
+from prettytable import PrettyTable # Librería para crear tablas
 
 # Definir la función "fitness" para encontrar la curva más delgada
 def fitness_function(params):
@@ -12,7 +12,7 @@ def fitness_function(params):
     vertex_y = a * (vertex_x ** 2) + b * vertex_x + c # Valor y de vertex
     y_left = a * (-1) ** 2 + b * (-1) + c # Coordenada y en x=-1
     y_right = a * (1) ** 2 + b * (1) + c # Coordenada y en x=1
-    curviness = abs(y_left - vertex_y) + abs(y_right - vertex_y)
+    curviness = abs(y_left - vertex_y) + abs(y_right - vertex_y) # Definir la curvatura
     return -curviness  # Negar para minimizar curva
 
 # Crear la población inicial
@@ -30,18 +30,18 @@ def selection(population, fitnesses, tournament_size=3):
     selected = []
     for _ in range(len(population)):
         tournament = random.sample(list(zip(population, fitnesses)), tournament_size)
-        winner = max(tournament, key=lambda x: x[1])[0]
+        winner = max(tournament, key=lambda x: x[1])[0] # key lambda para obtener el mejor fitness
         selected.append(winner)
     return selected
 
-# Función crossover
+# Función crossover que combina padres para crear hijos
 def crossover(parent1, parent2):
     alpha = random.random()
     child1 = tuple(alpha * p1 + (1 - alpha) * p2 for p1, p2 in zip(parent1, parent2))
     child2 = tuple(alpha * p2 + (1 - alpha) * p1 for p1, p2 in zip(parent1, parent2))
     return child1, child2
 
-# Función de mutación
+# Función de mutación para alterar un individuo con una tasa de mutación
 def mutation(individual, mutation_rate, lower_bound, upper_bound):
     individual = list(individual)
     for i in range(len(individual)):
@@ -57,7 +57,7 @@ def genetic_algorithm(population_size, lower_bound, upper_bound, generations, mu
     population = create_initial_population(population_size, lower_bound, upper_bound)
     
     # Preparar plot
-    fig, axs = plt.subplots(3, 1, figsize=(12, 18))  # 3 rows, 1 column for subplots
+    fig, axs = plt.subplots(3, 1, figsize=(12, 18))  # 3 filas, 1 columna por cada parámetro
     best_performers = []
     all_populations = []
 
