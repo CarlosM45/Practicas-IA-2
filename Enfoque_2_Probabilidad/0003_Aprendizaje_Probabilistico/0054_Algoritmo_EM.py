@@ -1,10 +1,11 @@
-# Algortimo EM
+# Algortimo EM, Expectation-Maximization
 import numpy as np
-from sklearn.mixture import GaussianMixture
-from sklearn.datasets import make_blobs
+from sklearn.mixture import GaussianMixture # Importar la clase GaussianMixture de sklearn.mixture, que implementa el modelo de mezcla gaussiana
+from sklearn.datasets import make_blobs # Importar la función make_blobs de sklearn.datasets, que genera datos sintéticos para agrupamiento
 
 # Generar datos simulados para agrupamiento
-X, _ = make_blobs(n_samples=300, centers=3, cluster_std=0.6, random_state=0)
+X, _ = make_blobs(n_samples=300, centers=3, cluster_std=0.6, random_state=0) # Donde el número de muestras es 300, el número de centros es 3 y la desviación estándar del clúster es 0.6
+# X es la matriz de características y _ es el vector de etiquetas (no se utiliza aquí)
 
 # Crear un modelo de mezcla gaussiana con 3 componentes
 gmm = GaussianMixture(n_components=3, max_iter=100, random_state=0)

@@ -1,14 +1,15 @@
 # Agrupamiento No Supervisado
-# importing dependencies
+# Importar dependencias
 import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-import sys
+import pandas as pd # Pandas es una biblioteca de Python para la manipulación y análisis de datos
+import matplotlib.pyplot as plt # Matplotlib es una biblioteca de Python para crear gráficos
+import sys # sys es un módulo que proporciona acceso a algunas variables utilizadas o mantenidas por el intérprete de Python
 
-# creating data
-mean_01 = np.array([0.0, 0.0])
-cov_01 = np.array([[1, 0.3], [0.3, 1]])
-dist_01 = np.random.multivariate_normal(mean_01, cov_01, 100)
+# Crear datos sintéticos
+# Generar datos aleatorios de 4 distribuciones gaussianas
+mean_01 = np.array([0.0, 0.0]) # Arreglo de medias para la primera distribución
+cov_01 = np.array([[1, 0.3], [0.3, 1]]) # Matriz de covarianza para la primera distribución
+dist_01 = np.random.multivariate_normal(mean_01, cov_01, 100) # Generar 100 puntos aleatorios de la distribución normal multivariada
 
 mean_02 = np.array([6.0, 7.0])
 cov_02 = np.array([[1.5, 0.3], [0.3, 1]])
@@ -23,12 +24,10 @@ mean_04 = np.array([2.0, -7.0])
 cov_04 = np.array([[1.2, 0.5], [0.5, 1.3]])
 dist_04 = np.random.multivariate_normal(mean_04, cov_01, 100)
 
-data = np.vstack((dist_01, dist_02, dist_03, dist_04))
-np.random.shuffle(data)
+data = np.vstack((dist_01, dist_02, dist_03, dist_04)) # Apilar las distribuciones en una sola matriz
+np.random.shuffle(data) # Mezclar los datos para que no estén ordenados
 
-# function to plot the selected centroids
-
-
+# Función para graficar los datos y los centroides
 def plot(data, centroids):
     plt.scatter(data[:, 0], data[:, 1], marker='.',
                 color='gray', label='data points')
@@ -43,50 +42,52 @@ def plot(data, centroids):
     plt.ylim(-10, 15)
     plt.show()
 
-# function to compute euclidean distance
+# Función para calcular la distancia euclidiana
 def distance(p1, p2):
     return np.sqrt(np.sum((p1 - p2)**2))
 
-# initialization algorithm
+# Algoitmo de inicialización de K-means++
+# K-means++ es un algoritmo de inicialización para el algoritmo K-means
 def initialize(data, k):
     '''
-    initialized the centroids for K-means++
+    Inicializa los centroides para el algoritmo K-means++
     inputs:
-        data - numpy array of data points having shape (200, 2)
-        k - number of clusters 
+        data - arreglo numpy con datos de los puntos (200, 2)
+        k - número de clusters
     '''
-    # initialize the centroids list and add
-    # a randomly selected data point to the list
+    # Inicializa el primer centroide aleatoriamente y agrega a la lista de centroides
+    # 'data.shape[0]' devuelve el número de filas en la matriz de datos
     centroids = []
     centroids.append(data[np.random.randint(
         data.shape[0]), :])
     plot(data, np.array(centroids))
 
-    # compute remaining k - 1 centroids
+    # Calcular los centroides restantes
+    # 'k-1' porque ya hemos seleccionado un centroide
     for c_id in range(k - 1):
 
-        # initialize a list to store distances of data
-        # points from nearest centroid
+        # Inicializa una lista para almacenar la distancia mínima de cada punto a los centroides
         dist = []
         for i in range(data.shape[0]):
             point = data[i, :]
-            d = sys.maxsize
+            d = sys.maxsize # 'sys.maxsize' devuelve el valor máximo de un entero en Python
 
-            # compute distance of 'point' from each of the previously
-            # selected centroid and store the minimum distance
+            # Calcular la distancia mínima de cada punto a los centroides existentes y guardarla en la lista
+            # 'len(centroids)' devuelve el número de centroides seleccionados hasta ahora
             for j in range(len(centroids)):
                 temp_dist = distance(point, centroids[j])
                 d = min(d, temp_dist)
             dist.append(d)
 
-        # select data point with maximum distance as our next centroid
+        # Seleccionar el siguiente centroide en base a la máxima distancia
+        # 'np.array(dist)' convierte la lista de distancias en un arreglo numpy
         dist = np.array(dist)
-        next_centroid = data[np.argmax(dist), :]
+        next_centroid = data[np.argmax(dist), :] # 'np.argmax(dist)' devuelve el índice del valor máximo en la lista de distancias
         centroids.append(next_centroid)
         dist = []
         plot(data, np.array(centroids))
     return centroids
 
 
-# call the initialize function to get the centroids
+# Llamar la función de inicialización para obtener los centroides
 centroids = initialize(data, k=4)

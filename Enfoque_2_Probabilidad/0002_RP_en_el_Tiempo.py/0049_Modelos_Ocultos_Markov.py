@@ -1,8 +1,9 @@
 # Modelo oculto de Markov en el aprendizaje automático
 import numpy as np
 import matplotlib.pyplot as plt
-import seaborn as sns
-from hmmlearn import hmm
+import seaborn as sns # Seaborn es una biblioteca de visualización de datos basada en Matplotlib
+from hmmlearn import hmm # hmmlearn es una biblioteca de Python para trabajar con Modelos Ocultos de Markov (HMMs)
+# HMMs son modelos estadísticos que asumen que el sistema es un proceso de Markov con estados ocultos
 
 # Definir el espacio de estados ocultos, palabras no observables directamente
 states = ["Silence", "Word1", "Word2", "Word3"]
